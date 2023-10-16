@@ -146,7 +146,7 @@ df_new.drop(columns=['title', 'maintext'], inplace=True)
 # df_new = df_new[~row_with_non_empty_column]
 
 # Save the dataframe as a csv file
-chunks_file_name = f"all_uuid_maintext_title_chunks_removed_ads.csv"
+chunks_file_name = f"all_uuid_maintext_title_chunks_no_ads.csv"
 df_new.to_csv(os.path.join(base_dir_path, f"{chunks_file_name}"), index=False)
 print(f"Saved data with chunks at {os.path.join(base_dir_path, f'{chunks_file_name}')}")
 print(f"Number of rows in chunks csv file: {len(df_new)}")
@@ -284,3 +284,19 @@ for i in tqdm(range(6)):
 
 print(f"Saved all chunks+images at {split_folder_path}")
 print("*"*100)
+
+# ------------------------------------------------------------------------------------ ##
+# Save uuid, image_url in a csv file
+# Use the merged csv file created in the previous step
+
+uuid_image_url_file_name = f"{len(df_merged)}_uuid_image_url.csv"
+df_merged[['uuid', 'image_url']].to_csv(os.path.join(base_dir_path, f'{uuid_image_url_file_name}'), index=False)
+
+# ------------------------------------------------------------------------------------ ##
+# Save uuid, chunk1, chunk2, chunk3, chunk4, chunk5, chunk6 in a csv file
+# Use the merged csv file created in the previous step
+
+chunks_file_name = f"{len(df_merged)}_uuid_chunks.csv"
+df_merged[['uuid', 'chunk1', 'chunk2', 'chunk3', 'chunk4', 'chunk5', 'chunk6']].to_csv(os.path.join(base_dir_path, f'{chunks_file_name}'), index=False)
+
+# ------------------------------------------------------------------------------------ ##
