@@ -51,12 +51,12 @@ print(f"Total number of images in {image_original_dir_path}: {len(original_total
 
 
 ## ---------------------------------------------------------------------------------------------------- ##
-# PART 1: Create a csv file with two columns: uuid and image_path for all the images in the new folder
+# PART 2: Create a csv file with two columns: uuid and image_path for all the images in the new folder
 ## ---------------------------------------------------------------------------------------------------- ##
 
 # Create a list of tuples with uuid and image_path
 uuid_image_path = []
-prefix_file_path = "https://raw.githubusercontent.com//copperwiring/news-images/main/image_dir/"
+prefix_file_path = "https://raw.githubusercontent.com/copperwiring/news-image-cleanup/main/all_images_removebadones/"
 for image in tqdm(total_images):
     uuid = image.split(".")[0]
     image_path = os.path.join(prefix_file_path, image)
@@ -66,7 +66,7 @@ for image in tqdm(total_images):
 df = pd.DataFrame(uuid_image_path, columns=["uuid", "image_url"])
 
 # Save the df as csv
-csv_file_path = os.path.join(base_dir_path, "all_image_url.csv")
+csv_file_path = os.path.join(base_dir_path, "all_image_url.csv") # this has all cleaned, filtered and removed bad image urls
 print(f"Saving csv file to {csv_file_path}")
 
 # Delete the csv file if it already exists
@@ -77,8 +77,8 @@ df.to_csv(csv_file_path, index=False)
 print(f"Saved csv file to {csv_file_path}")
 
 # ------------------------------------------------------------------------------------ ##
-PART 2: Check if the uuid in the cleaned_csv file in each topic folder is present in the uuids in the all_image_url.csv file
-uuids in all_image_url.csv file belong to images which have been checked to be of good quality
+# PART 3: Check if the uuid in the cleaned_csv file in each topic folder is present in the uuids in the all_image_url.csv file
+# uuids in all_image_url.csv file belong to images which have been checked to be of good quality
 # ------------------------------------------------------------------------------------ ##
 
 list_of_uuid = df["uuid"].tolist()
